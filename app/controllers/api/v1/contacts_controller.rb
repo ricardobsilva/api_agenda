@@ -7,7 +7,7 @@ class Api::V1::ContactsController < ApplicationController
 
   def create
     @api_v1_contact = Contact.new(contact_params)
-    
+
     if @api_v1_contact.save
       render json: @api_v1_contact
     else
@@ -16,7 +16,7 @@ class Api::V1::ContactsController < ApplicationController
   end
 
   def contact_params
-    params.require(:contact).permit(:name, :birth, :name, :mobile_operator_id)
+    params.require(:contact).permit(:name, :birth, :phone, :mobile_operator_id)
   end
 
 end
