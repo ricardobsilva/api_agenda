@@ -1,5 +1,5 @@
 class Api::V1::ContactsController < ApplicationController
-
+  before_action :set_contact, only: :update 
   def index
     @api_v1_contacts = Contact.all
     render json: @api_v1_contacts
@@ -13,6 +13,20 @@ class Api::V1::ContactsController < ApplicationController
     else
       render json: @api_v1_contact.errors
     end
+  end
+
+  def update
+    if @api_v1_contact.update(contact_params)
+      render json:@api_v1_contact
+    else
+      render json:@api_v1_contact.errors
+    end
+  end
+
+  private
+
+  def set_contact
+    @api_v1_contact = Contact.find(params[:id])
   end
 
   def contact_params
