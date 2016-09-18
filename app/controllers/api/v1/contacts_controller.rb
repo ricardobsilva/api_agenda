@@ -1,5 +1,5 @@
 class Api::V1::ContactsController < ApplicationController
-  before_action :set_contact, only: :update 
+  before_action :set_contact, only: [:update,:destroy]
   def index
     @api_v1_contacts = Contact.all
     render json: @api_v1_contacts
@@ -21,6 +21,11 @@ class Api::V1::ContactsController < ApplicationController
     else
       render json:@api_v1_contact.errors
     end
+  end
+
+  def destroy
+    @api_v1_contact.destroy
+    render json:{message: 'contato deletado'}
   end
 
   private
